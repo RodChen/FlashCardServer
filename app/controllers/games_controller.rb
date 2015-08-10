@@ -25,11 +25,15 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    
+    # TODO: pick a rival for player who requests a new game
+    @game.player1_id = 1
+    @game.player2_id = 2
 
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @game }
+        format.json { render json: @game, meta: { problems: [1, 6, 56, 157, 234]} }
       else
         format.html { render action: 'new' }
         format.json { render json: @game.errors, status: :unprocessable_entity }
