@@ -1,0 +1,36 @@
+<h1>Listing game_results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>User</th>
+      <th>Problem</th>
+      <th>Correct</th>
+      <th>Consumed time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_results.each do |game_result| %>
+      <tr>
+        <td><%= game_result.game_id %></td>
+        <td><%= game_result.user_id %></td>
+        <td><%= game_result.problem_id %></td>
+        <td><%= game_result.correct %></td>
+        <td><%= game_result.consumed_time %></td>
+        <td><%= game_result.result %></td>
+        <td><%= link_to 'Show', game_result %></td>
+        <td><%= link_to 'Edit', edit_game_result_path(game_result) %></td>
+        <td><%= link_to 'Destroy', game_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game result', new_game_result_path %>

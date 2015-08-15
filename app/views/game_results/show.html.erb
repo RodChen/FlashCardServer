@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @game_result.game_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @game_result.user_id %>
+</p>
+
+<p>
+  <strong>Problem:</strong>
+  <%= @game_result.problem_id %>
+</p>
+
+<p>
+  <strong>Correct:</strong>
+  <%= @game_result.correct %>
+</p>
+
+<p>
+  <strong>Consumed time:</strong>
+  <%= @game_result.consumed_time %>
+</p>
+
+<p>
+  <strong>Result:</strong>
+  <%= @game_result.result %>
+</p>
+
+<%= link_to 'Edit', edit_game_result_path(@game_result) %> |
+<%= link_to 'Back', game_results_path %>

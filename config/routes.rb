@@ -1,4 +1,6 @@
 FlashCard::Application.routes.draw do
+  resources :game_results
+
   resources :users
 
   resources :games
