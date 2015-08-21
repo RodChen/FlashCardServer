@@ -51,9 +51,14 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     colorize (0.7.7)
+    em-websocket (0.5.1)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
+    eventmachine (1.0.8)
     execjs (2.5.2)
     hike (1.2.3)
+    http_parser.rb (0.6.0)
     i18n (0.7.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -149,6 +154,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.1)
   capistrano-rvm
   coffee-rails (~> 4.0.0)
+  em-websocket
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.4)
