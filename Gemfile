@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.4'
+gem 'rails', '4.2.3'
+gem 'rails-api'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -45,6 +46,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1.1'
   gem 'capistrano-rvm'
+  gem 'spring'
 end
 
 # Use debugger
