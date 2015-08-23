@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815092023) do
+ActiveRecord::Schema.define(version: 20150823160437) do
 
-  create_table "game_results", force: true do |t|
+  create_table "game_results", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "user_id"
     t.integer  "problem_id"
@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20150815092023) do
     t.integer  "consumed_time"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "result"
+    t.string   "result",        limit: 255
   end
 
-  create_table "games", force: true do |t|
+  create_table "games", force: :cascade do |t|
     t.integer  "stock_id"
     t.integer  "num_of_words"
     t.integer  "player1_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150815092023) do
     t.datetime "updated_at"
   end
 
-  create_table "games_users", id: false, force: true do |t|
+  create_table "games_users", id: false, force: :cascade do |t|
     t.integer "game_id"
     t.integer "user_id"
   end
@@ -41,12 +41,15 @@ ActiveRecord::Schema.define(version: 20150815092023) do
   add_index "games_users", ["game_id"], name: "index_games_users_on_game_id"
   add_index "games_users", ["user_id"], name: "index_games_users_on_user_id"
 
-  create_table "users", force: true do |t|
-    t.string   "email"
-    t.string   "name"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",           limit: 255
+    t.string   "name",            limit: 255
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

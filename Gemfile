@@ -54,3 +54,6 @@ end
 
 gem 'active_model_serializers'
 gem 'em-websocket'
+
+# secure password
+gem 'bcrypt', '3.1.10'
