@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150823160437) do
     t.integer  "consumed_time"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "result",        limit: 255
+    t.string   "result"
   end
 
   create_table "games", force: :cascade do |t|
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20150823160437) do
   add_index "games_users", ["user_id"], name: "index_games_users_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",           limit: 255
-    t.string   "name",            limit: 255
+    t.string   "email"
+    t.string   "name"
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
