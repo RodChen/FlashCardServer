@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'signup' => 'users#signup'
-      get 'login' => 'users#login'
-      delete 'logout' => 'user#logout'
+      post 'login' => 'users#login'
+      post 'logout' => 'users#logout'
     end
   end
 

@@ -1,4 +1,4 @@
-class Api::V1::UsersController < ApplicationController
+class Api::V1::UsersController < Api::ApiController
 
   def signup
     @user = User.new(user_params)
@@ -13,11 +13,24 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    
+    user = User.find_by(email: user_params[:email].downcase)
+    if user && user.authenticate(user_params[:password])
+      render json: Api::V1::UserSerializer.new(user, root: false).to_json,
+        status: 201      
+    else
+      render json: user.errors, status: :unauthorized
+    end
   end
 
+# NOT READY
   def logout
-    
+    user = User.find_by(email: user_params[:email].downcase)
+    if user && user.authenticate(user_params[:password])
+      user.update(password: user.password, api_key: nil)
+      head status: :ok      
+    else
+      head status: :unauthorized
+    end
   end
 
   private
