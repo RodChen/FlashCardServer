@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
+  before_create do |user|
+    user.api_key = user.generate_api_key
+    user.level = 1
+  end
 
   has_and_belongs_to_many :games
 
@@ -16,5 +20,12 @@ class User < ActiveRecord::Base
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+  end
+
+  def generate_api_key
+    loop do
+      token = SecureRandom.base64.tr('+/=', 'Qrt')
+      break token unless User.find_by(api_key: token)
+    end
   end
 end

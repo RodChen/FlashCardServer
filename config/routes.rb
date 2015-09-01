@@ -11,6 +11,14 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
+  namespace :api do
+    namespace :v1 do
+      post 'signup' => 'users#signup'
+      get 'login' => 'users#login'
+      delete 'logout' => 'user#logout'
+    end
+  end
+
   resources :users
   resources :game_results
   resources :games
