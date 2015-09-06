@@ -9,8 +9,8 @@ class Api::ApiController < ApplicationController
     # end
 
     def authenticate
-      api_key = request.headers['Api-Key']
-      @user = User.where(api_key: api_key).first if api_key
+      token = request.headers['Token']
+      @user = User.where(token: token).first if token
       unless @user
         head status: :unauthorized
         return false

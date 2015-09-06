@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create do |user|
-    user.api_key = user.generate_api_key
+    user.token = user.generate_token
     user.level = 1
   end
 
@@ -22,10 +22,10 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def generate_api_key
+  def generate_token
     loop do
       token = SecureRandom.base64.tr('+/=', 'Qrt')
-      break token unless User.find_by(api_key: token)
+      break token unless User.find_by(token: token)
     end
   end
 end
