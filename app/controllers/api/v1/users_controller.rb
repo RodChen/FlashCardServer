@@ -13,21 +13,22 @@ class Api::V1::UsersController < Api::ApiController
   end
 
   def login
-    user = User.find_by(email: user_params[:email].downcase)
+    user = User.find_by(email: user_params[:email])
     if user && user.authenticate(user_params[:password])
+      if user.api_key.nil?
+        user.update_attribute(:api_key, user.generate_api_key)
+      end
       render json: Api::V1::UserSerializer.new(user, root: false).to_json,
-        status: 201      
+        status: :accepted      
     else
-      render json: user.errors, status: :unauthorized
+      head status: :unauthorized
     end
   end
 
-# NOT READY
   def logout
-    user = User.find_by(email: user_params[:email].downcase)
-    if user && user.authenticate(user_params[:password])
-      user.update(password: user.password, api_key: nil)
-      head status: :ok      
+    if authenticate
+      @user.update_attribute(:api_key, nil)
+      head status: :ok
     else
       head status: :unauthorized
     end
