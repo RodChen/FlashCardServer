@@ -3,12 +3,10 @@ class Api::V1::UsersController < Api::ApiController
   def signup
     @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-        format.json { render json: @user, status: :created }
-      else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      render json: Api::V1::UserSerializer.new(@user, root: false).to_json, status: :created
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
